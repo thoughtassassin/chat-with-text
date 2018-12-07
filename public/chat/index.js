@@ -137,8 +137,8 @@ $ (function () {
         'https://api.twilio.com/2010-04-01/Accounts/' + account +  '/Messages.json';
       const details = {
         Body: $input.val(),
-        From: '+14322192238',
-        To: '+14322882200',
+        From: from,
+        To: to,
       };
 
       var formBody = [];
