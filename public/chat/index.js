@@ -1,5 +1,18 @@
 $ (function () {
   var $chatWindow = $ ('#messages');
+  var chatChannel, to, from;
+
+  $.getJSON(
+    '/chat_variables',
+    {
+      device: 'browser',
+    },
+    function(data) {
+      account = data.ACCOUNT,
+      to = data.TO,
+      from = data.FROM
+    }
+  )
 
   // Our interface to the Chat service
   var chatClient;
@@ -121,7 +134,7 @@ $ (function () {
     if (e.keyCode == 13) {
       generalChannel.sendMessage ($input.val());
       const url =
-        'https://api.twilio.com/2010-04-01/Accounts/' + process.env.TWILIO_ACCOUNT_SID + '/Messages.json';
+        'https://api.twilio.com/2010-04-01/Accounts/' + account +  '/Messages.json';
       const details = {
         Body: $input.val(),
         From: '+14322192238',

@@ -39,7 +39,7 @@ router.post ('/sms', (req, res) => {
   client.chat
     .services (servicesSID)
     .channels (chatChannel)
-    .messages.create ({from: 'Svimp', body: content})
+    .messages.create ({from: 'Agent', body: content})
     .then (message => console.log (message))
     .catch (e => console.log (e))
     .done ();
@@ -83,6 +83,15 @@ router.post ('/messenger_auth', function (req, res) {
   registerBind (camelCaseKeys (binding)).then (data => {
     res.status (data.status);
     res.send (data.data);
+  });
+});
+
+//Verification endpoint for Facebook needed to register a webhook.
+router.get ('/chat_variables', function (req, res) {
+  res.send ({
+    ACCOUNT: process.env.TWILIO_ACCOUNT_SID,
+    FROM: process.env.TWILIO_FROM,
+    TO: process.env.TWILIO_TO
   });
 });
 
