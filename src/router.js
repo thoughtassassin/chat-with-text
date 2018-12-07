@@ -90,6 +90,7 @@ router.post ('/messenger_auth', function (req, res) {
 router.get ('/chat_variables', function (req, res) {
   res.send ({
     ACCOUNT: process.env.TWILIO_ACCOUNT_SID,
+    TOKEN: process.env.TWILIO_AUTH_TOKEN,
     FROM: process.env.TWILIO_FROM,
     TO: process.env.TWILIO_TO
   });

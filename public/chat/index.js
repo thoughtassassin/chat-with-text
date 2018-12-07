@@ -1,6 +1,6 @@
 $ (function () {
   var $chatWindow = $ ('#messages');
-  var chatChannel, to, from;
+  var account, token, to, from;
 
   $.getJSON(
     '/chat_variables',
@@ -9,6 +9,7 @@ $ (function () {
     },
     function(data) {
       account = data.ACCOUNT,
+      token = data.TOKEN,
       to = data.TO,
       from = data.FROM
     }
@@ -153,7 +154,7 @@ $ (function () {
         method: 'POST', // or 'PUT'
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: 'Basic QUNlMjY0MmNjYTdhZTgwM2VmYmJhNzU4N2I0ZTEzNzk4OTpjYWUxODEyZDVkMzRjNDI0YmRmYTM4ZmNiNWNmZDEyOQ==',
+          Authorization: 'Basic ' + btoa(account + ":" + token),
         },
         body: formBody,
       })
